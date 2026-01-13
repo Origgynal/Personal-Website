@@ -18,6 +18,113 @@
             overflow-x: hidden;
         }
 
+        /* Password Screen */
+        #password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        #password-screen.hidden {
+            display: none;
+        }
+
+        .password-container {
+            background: rgba(26, 31, 58, 0.8);
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+            max-width: 400px;
+            width: 90%;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .password-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+            text-shadow: 0 0 20px #00d4ff;
+        }
+
+        .password-container p {
+            color: #66ccff;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            background: rgba(10, 14, 39, 0.8);
+            border: 2px solid #00d4ff;
+            border-radius: 8px;
+            color: #00d4ff;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .password-input:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            border-color: #66ccff;
+        }
+
+        .password-button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #0088ff 100%);
+            border: none;
+            border-radius: 8px;
+            color: #0a0e27;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .password-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .password-button:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #ff0088;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .error-message.show {
+            opacity: 1;
+        }
+
+        #main-content {
+            display: none;
+        }
+
+        #main-content.visible {
+            display: block;
+        }
+
         /* Animated background particles */
         .particles {
             position: fixed;
@@ -376,176 +483,237 @@
             section {
                 padding: 2rem 1.5rem;
             }
+
+            .password-container {
+                padding: 2rem;
+            }
+
+            .password-container h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Animated particles background -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#hobbies">Hobbies</a></li>
-            <li><a href="#brand">Brand</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        <!-- Hero Section -->
-        <div class="hero" id="home">
-            <h1>IGNATIUS PETILLA</h1>
-            <div class="tagline">Welcome to my digital realm</div>
+    <!-- Password Screen -->
+    <div id="password-screen">
+        <div class="password-container">
+            <h1>🔒 ACCESS REQUIRED</h1>
+            <p>Enter password to continue</p>
+            <input type="password" class="password-input" id="password-input" placeholder="Enter password...">
+            <button class="password-button" onclick="checkPassword()">ENTER</button>
+            <div class="error-message" id="error-message">❌ Incorrect password. Try again.</div>
         </div>
-
-        <!-- Resume Section -->
-        <section id="resume">
-            <h2>Resume</h2>
-            
-            <div class="resume-item">
-                <h3>Senior Developer</h3>
-                <div class="date">2022 - Present</div>
-                <p>Leading development of cutting-edge web applications with a focus on user experience and performance optimization.</p>
-            </div>
-
-            <div class="resume-item">
-                <h3>Full Stack Developer</h3>
-                <div class="date">2019 - 2022</div>
-                <p>Built scalable web solutions and collaborated with cross-functional teams to deliver high-quality products.</p>
-            </div>
-
-            <div class="resume-item">
-                <h3>Junior Developer</h3>
-                <div class="date">2017 - 2019</div>
-                <p>Started my journey in software development, learning best practices and modern development workflows.</p>
-            </div>
-
-            <h3 style="color: #66ccff; margin-top: 3rem; margin-bottom: 1rem;">Skills & Abilities</h3>
-            <div class="skills">
-                <div class="skill-badge">JavaScript</div>
-                <div class="skill-badge">Python</div>
-                <div class="skill-badge">React</div>
-                <div class="skill-badge">Node.js</div>
-                <div class="skill-badge">UI/UX Design</div>
-                <div class="skill-badge">Game Development</div>
-                <div class="skill-badge">Cloud Computing</div>
-                <div class="skill-badge">Database Design</div>
-            </div>
-        </section>
-
-        <!-- Hobbies Section -->
-        <section id="hobbies">
-            <h2>Hobbies & Interests</h2>
-            <div class="hobbies-grid">
-                <div class="hobby-card">
-                    <div class="hobby-icon">🎮</div>
-                    <h3>Gaming</h3>
-                    <p>Exploring virtual worlds and mastering competitive gameplay across multiple platforms.</p>
-                </div>
-                <div class="hobby-card">
-                    <div class="hobby-icon">💻</div>
-                    <h3>Coding</h3>
-                    <p>Building side projects and contributing to open-source communities.</p>
-                </div>
-                <div class="hobby-card">
-                    <div class="hobby-icon">📸</div>
-                    <h3>Photography</h3>
-                    <p>Capturing moments and telling stories through the lens.</p>
-                </div>
-                <div class="hobby-card">
-                    <div class="hobby-icon">🎨</div>
-                    <h3>Digital Art</h3>
-                    <p>Creating pixel art and designing game assets in my free time.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Personal Brand Section -->
-        <section id="brand">
-            <h2>Personal Brand</h2>
-            <div class="brand-content">
-                <p>I'm a passionate developer who believes in creating experiences that merge technology with creativity. My mission is to build digital solutions that make a real impact while staying true to my gaming roots.</p>
-                <p style="color: #66ccff; margin-top: 1.5rem;">"Level up every day, one commit at a time."</p>
-            </div>
-
-            <div class="brand-stats">
-                <div class="stat-box">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Projects Completed</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">50k+</div>
-                    <div class="stat-label">Lines of Code</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">100+</div>
-                    <div class="stat-label">Happy Clients</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Photo Gallery Section -->
-        <section id="gallery">
-            <h2>Photo Gallery</h2>
-            <div class="gallery">
-                <div class="gallery-item">📷 Your Photo 1</div>
-                <div class="gallery-item">📷 Your Photo 2</div>
-                <div class="gallery-item">📷 Your Photo 3</div>
-                <div class="gallery-item">📷 Your Photo 4</div>
-                <div class="gallery-item">📷 Your Photo 5</div>
-                <div class="gallery-item">📷 Your Photo 6</div>
-            </div>
-        </section>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>Ready to connect? Let's team up!</p>
-        <div class="social-links">
-            <a href="#" title="GitHub">💻</a>
-            <a href="#" title="LinkedIn">💼</a>
-            <a href="#" title="Twitter">🐦</a>
-            <a href="#" title="Email">📧</a>
+    <!-- Main Content (hidden until password is correct) -->
+    <div id="main-content">
+        <!-- Animated particles background -->
+        <div class="particles" id="particles"></div>
+
+        <!-- Navigation -->
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#brand">Brand</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero" id="home">
+                <h1>IGNATIUS PETILLA</h1>
+                <div class="tagline">Welcome to my digital realm</div>
+            </div>
+
+            <!-- Resume Section -->
+            <section id="resume">
+                <h2>Resume</h2>
+                
+                <div class="resume-item">
+                    <h3>Senior Developer</h3>
+                    <div class="date">2022 - Present</div>
+                    <p>Leading development of cutting-edge web applications with a focus on user experience and performance optimization.</p>
+                </div>
+
+                <div class="resume-item">
+                    <h3>Full Stack Developer</h3>
+                    <div class="date">2019 - 2022</div>
+                    <p>Built scalable web solutions and collaborated with cross-functional teams to deliver high-quality products.</p>
+                </div>
+
+                <div class="resume-item">
+                    <h3>Junior Developer</h3>
+                    <div class="date">2017 - 2019</div>
+                    <p>Started my journey in software development, learning best practices and modern development workflows.</p>
+                </div>
+
+                <h3 style="color: #66ccff; margin-top: 3rem; margin-bottom: 1rem;">Skills & Abilities</h3>
+                <div class="skills">
+                    <div class="skill-badge">JavaScript</div>
+                    <div class="skill-badge">Python</div>
+                    <div class="skill-badge">React</div>
+                    <div class="skill-badge">Node.js</div>
+                    <div class="skill-badge">UI/UX Design</div>
+                    <div class="skill-badge">Game Development</div>
+                    <div class="skill-badge">Cloud Computing</div>
+                    <div class="skill-badge">Database Design</div>
+                </div>
+            </section>
+
+            <!-- Hobbies Section -->
+            <section id="hobbies">
+                <h2>Hobbies & Interests</h2>
+                <div class="hobbies-grid">
+                    <div class="hobby-card">
+                        <div class="hobby-icon">🎮</div>
+                        <h3>Gaming</h3>
+                        <p>Exploring virtual worlds and mastering competitive gameplay across multiple platforms.</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">💻</div>
+                        <h3>Coding</h3>
+                        <p>Building side projects and contributing to open-source communities.</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">📸</div>
+                        <h3>Photography</h3>
+                        <p>Capturing moments and telling stories through the lens.</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="hobby-icon">🎨</div>
+                        <h3>Digital Art</h3>
+                        <p>Creating pixel art and designing game assets in my free time.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Personal Brand Section -->
+            <section id="brand">
+                <h2>Personal Brand</h2>
+                <div class="brand-content">
+                    <p>I'm a passionate developer who believes in creating experiences that merge technology with creativity. My mission is to build digital solutions that make a real impact while staying true to my gaming roots.</p>
+                    <p style="color: #66ccff; margin-top: 1.5rem;">"Level up every day, one commit at a time."</p>
+                </div>
+
+                <div class="brand-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">50k+</div>
+                        <div class="stat-label">Lines of Code</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Photo Gallery Section -->
+            <section id="gallery">
+                <h2>Photo Gallery</h2>
+                <div class="gallery">
+                    <div class="gallery-item">📷 Your Photo 1</div>
+                    <div class="gallery-item">📷 Your Photo 2</div>
+                    <div class="gallery-item">📷 Your Photo 3</div>
+                    <div class="gallery-item">📷 Your Photo 4</div>
+                    <div class="gallery-item">📷 Your Photo 5</div>
+                    <div class="gallery-item">📷 Your Photo 6</div>
+                </div>
+            </section>
         </div>
-        <p style="margin-top: 2rem; color: #666;">© 2026 Ignatius Petilla. Game On!</p>
-    </footer>
+
+        <!-- Footer -->
+        <footer>
+            <p>Ready to connect? Let's team up!</p>
+            <div class="social-links">
+                <a href="#" title="GitHub">💻</a>
+                <a href="#" title="LinkedIn">💼</a>
+                <a href="#" title="Twitter">🐦</a>
+                <a href="#" title="Email">📧</a>
+            </div>
+            <p style="margin-top: 2rem; color: #666;">© 2026 Ignatius Petilla. Game On!</p>
+        </footer>
+    </div>
 
     <script>
-        // Generate animated particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particlesContainer.appendChild(particle);
+        // Set your password here
+        const CORRECT_PASSWORD = "Iggypop123";
+
+        function checkPassword() {
+            const input = document.getElementById('password-input');
+            const errorMsg = document.getElementById('error-message');
+            const passwordScreen = document.getElementById('password-screen');
+            const mainContent = document.getElementById('main-content');
+
+            if (input.value === CORRECT_PASSWORD) {
+                // Correct password
+                passwordScreen.classList.add('hidden');
+                mainContent.classList.add('visible');
+                initializeParticles();
+                initializeScrolling();
+            } else {
+                // Incorrect password
+                errorMsg.classList.add('show');
+                input.value = '';
+                input.focus();
+
+                // Hide error message after 3 seconds
+                setTimeout(() => {
+                    errorMsg.classList.remove('show');
+                }, 3000);
+            }
         }
 
-        // Smooth scrolling for navigation
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
+        // Allow Enter key to submit password
+        document.getElementById('password-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
         });
 
-        // Add scroll animation to sections
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 1s ease-out';
-                }
-            });
-        });
+        function initializeParticles() {
+            // Generate animated particles
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
 
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
+        function initializeScrolling() {
+            // Smooth scrolling for navigation
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            // Add scroll animation to sections
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 1s ease-out';
+                    }
+                });
+            });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        }
     </script>
 </body>
 </html>
